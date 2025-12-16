@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transforme seu corpo com o Método Mero. Treino individualizado, dieta e suporte 24h com Matheus e Caíque.">
+    <title>Método Mero | Consultoria Online de Treino</title>
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --primary: #CCFF00; /* Verde Neon (Mantido para CTAs) */
+            --primary-hover: #b3e600;
+            
+            /* Cores da marca */
+            --brand-orange: #EA580C; /* Laranja Escuro */
+            --brand-blue: #0E7490;   /* Azul Petróleo */
+            
+            --dark-bg: #0F172A;
+            --card-bg: #1E293B;
+            --text-light: #F8FAFC;
+            --text-gray: #94A3B8;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+        .text-center { text-align: center; }
+        .flex-col { display: flex; flex-direction: column; gap: 1rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .section-padding { padding: var(--spacing-lg) 0; }
+        
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { line-height: 1.2; font-weight: 700; color: #fff; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; }
+        .highlight { color: var(--primary); }
+        .subheadline { font-size: 1.2rem; color: var(--text-gray); max-width: 600px; margin: 0 auto 2rem; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            width: auto;
+        }
+
+        .btn-primary { background-color: var(--primary); color: var(--dark-bg); }
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(204, 255, 0, 0.3); }
+        .btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+        .btn-outline:hover { background: rgba(204, 255, 0, 0.1); }
+
+        /* --- FLOATING HEADER (ILHA) --- */
+        .floating-header {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1100px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .brand-logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #1E293B;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .brand-metodo { color: var(--brand-orange); }
+        .brand-mero { color: var(--brand-blue); }
+
+        /* Links de Navegação */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Botão Header Mobile (escondido no desktop) */
+        .header-cta-mobile { display: none; }
+
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            position: relative;
+            text-align: center;
+            padding-top: 6rem;
+        }
+        .hero-content { z-index: 2; max-width: 800px; }
+        .cta-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
+
+        /* --- ABOUT --- */
+        .about-card { background: var(--card-bg); padding: 2rem; border-radius: var(--radius); border: 1px solid #334155; }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            background: #000;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+        .video-wrapper iframe, .video-wrapper video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* --- RESULTS (BEFORE/AFTER) --- */
+        .result-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; }
+        .result-img { width: 100%; height: 300px; object-fit: cover; background-color: #334155; }
+        .result-label { padding: 1rem; text-align: center; font-weight: bold; }
+        
+        /* --- PLANS --- */
+        .plans-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+        .plan-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            border: 1px solid #334155;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+        .plan-card.featured { border-color: var(--primary); transform: scale(1.05); z-index: 2; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .plan-card:hover { border-color: var(--primary-hover); }
+        .plan-price { font-size: 2.5rem; font-weight: 700; margin: 1rem 0; color: var(--text-light); }
+        .plan-period { font-size: 1rem; color: var(--text-gray); font-weight: 400; }
+        .plan-features { list-style: none; margin: 2rem 0; flex-grow: 1; }
+        .plan-features li { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-gray); }
+        .check { color: var(--primary); }
+        .badge {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: var(--dark-bg); padding: 0.25rem 1rem;
+            border-radius: 20px; font-weight: 700; font-size: 0.8rem;
+        }
+
+        /* --- FOOTER --- */
+        footer { background: #020617; padding: 3rem 0; border-top: 1px solid #1E293B; margin-top: auto; }
+        .footer-links a { color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--primary); }
+
+        /* --- ANIMATIONS (Scroll Reveal) --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .hero { align-items: center; padding-top: 8rem; }
+            .plan-card.featured { transform: scale(1); }
+            h1 { font-size: 2.5rem; }
+            .floating-header { padding: 0.6rem 1rem; width: 92%; }
+            .brand-name { font-size: 1.3rem; }
+            .brand-logo-img { width: 35px; height: 35px; }
+            
+            /* Mobile Nav Adjustments */
+            .nav-links { display: none; } /* Esconde links de texto no mobile */
+            .header-cta-mobile { display: block; } /* Mostra botão CTA no mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="floating-header">
+        <a href="#" class="brand-container">
+            <img src="https://placehold.co/80x80/transparent/FFFFFF?text=LOGO" alt="Logotipo Método Mero" class="brand-logo-img" width="40" height="40">
+            <span class="brand-name">
+                <span class="brand-metodo">metodo</span><span class="brand-mero">mero</span>
+            </span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#sobre">Sobre</a>
+            <a href="#resultados">Resultados</a>
+            <a href="#planos">Planos</a>
+        </div>
+        
+        <div class="header-cta-mobile">
+            <a href="#planos" class="btn btn-primary btn-sm">Começar</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-content">
+            <h1 class="reveal">Transforme seu corpo com o <span class="highlight">Método Mero</span></h1>
+            <p class="subheadline reveal">Treino individualizado, suporte 24h e a estratégia certa para você atingir seu melhor shape, sem perder tempo.</p>
+            
+            <div class="cta-group reveal">
+                <a href="https://wa.me/5579999692866?text=Ol%C3%A1%20Matheus,%20vim%20pelo%20site%20e%20quero%20saber%20sobre%20a%20consultoria." class="btn btn-primary">
+                    Falar com Matheus
+                </a>
+                <a href="https://wa.me/5579996503410?text=Ol%C3%A1%20Ca%C3%ADque,%20vim%20pelo%20site%20e%20quero%20saber%20sobre%20a%20consultoria." class="btn btn-outline">
+                    Falar com Caíque
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding" id="sobre">
+        <div class="container">
+            <div class="grid-3" style="grid-template-columns: 1fr;">
+                <article class="about-card text-center reveal">
+                    <h2 class="highlight">Quem somos</h2>
+                    <p style="color: var(--text-gray); max-width: 700px; margin: 0 auto;">
+                        Prof. Matheus e Prof. Caíque. Juntos desenvolvemos o <strong>Método Mero</strong>, uma abordagem que une ciência e prática para gerar resultados reais. Não vendemos apenas fichas de treino, entregamos um acompanhamento próximo focado na sua evolução constante.
+                    </p>
+                    
+                    <div class="video-wrapper">
+                        <video controls preload="none" poster="https://placehold.co/800x450/1E293B/FFF?text=Video+Apresentacao+Capa">
+                            <source src="" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="resultados" style="background-color: #0b1120;">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2>Resultados Reais</h2>
+                <p class="subheadline">Veja o que o Método Mero fez por nossos alunos.</p>
+            </div>
+
+            <div class="grid-3 reveal">
+                <div class="result-card">
+                    <img src="https://placehold.co/400x300/222/FFF?text=Antes+e+Depois+1" alt="Transformação Aluno 1" class="result-img" loading="lazy" width="400" height="300">
+                    <div class="result-label">Evolução de 3 meses</div>
+                </div>
+                <div class="result-card">
+                    <img src="https://placehold.co/400x300/222/FFF?text=Antes+e+Depois+2" alt="Transformação Aluno 2" class="result-img" loading="lazy" width="400" height="300">
+                    <div class="result-label">Definição muscular</div>
+                </div>
+                <div class="result-card">
+                    <img src="https://placehold.co/400x300/222/FFF?text=Antes+e+Depois+3" alt="Transformação Aluno 3" class="result-img" loading="lazy" width="400" height="300">
+                    <div class="result-label">Perda de gordura</div>
+                </div>
+            </div>
+
+            <div class="grid-3 reveal" style="margin-top: 2rem;">
+                 <div class="video-wrapper">
+                    <video controls preload="none" poster="https://placehold.co/400x225/1E293B/FFF?text=Depoimento+1">
+                        <source src="" type="video/mp4">
+                    </video>
+                 </div>
+                 <div class="video-wrapper">
+                    <video controls preload="none" poster="https://placehold.co/400x225/1E293B/FFF?text=Depoimento+2">
+                        <source src="" type="video/mp4">
+                    </video>
+                 </div>
+                 <div class="video-wrapper">
+                    <video controls preload="none" poster="https://placehold.co/400x225/1E293B/FFF?text=Depoimento+3">
+                        <source src="" type="video/mp4">
+                    </video>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="planos">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2>Escolha seu Plano</h2>
+                <p class="subheadline">Investimento na sua saúde e autoestima.</p>
+            </div>
+
+            <div class="plans-grid reveal">
+                <div class="plan-card">
+                    <h3>Mensal</h3>
+                    <div class="plan-price">R$ 44,90<span class="plan-period">/mês</span></div>
+                    <ul class="plan-features">
+                        <li><span class="check">✔</span> 30 dias de acompanhamento</li>
+                        <li><span class="check">✔</span> Treino individualizado</li>
+                        <li><span class="check">✔</span> Suporte 24h</li>
+                        <li><span class="check">✔</span> Plano alimentar (Bônus)</li>
+                    </ul>
+                    <a href="https://wa.me/5579999692866?text=Quero%20o%20plano%20MENSAL%20do%20M%C3%A9todo%20Mero" class="btn btn-outline">Quero este</a>
+                </div>
+
+                <div class="plan-card featured">
+                    <div class="badge">MAIS POPULAR</div>
+                    <h3>Trimestral</h3>
+                    <div class="plan-price">R$ 119,90<span class="plan-period">/total</span></div>
+                    <p style="font-size: 0.9rem; color: var(--primary);">Eqv. a R$ 39,96/mês</p>
+                    <ul class="plan-features">
+                        <li><span class="check">✔</span> 90 dias de acompanhamento</li>
+                        <li><span class="check">✔</span> Troca de treino a cada 30 dias</li>
+                        <li><span class="check">✔</span> Suporte 24h Prioritário</li>
+                        <li><span class="check">✔</span> Plano alimentar (Bônus)</li>
+                    </ul>
+                    <a href="https://wa.me/5579999692866?text=Quero%20o%20plano%20TRIMESTRAL%20do%20M%C3%A9todo%20Mero" class="btn btn-primary">Quero este</a>
+                </div>
+
+                <div class="plan-card">
+                    <h3>Semestral</h3>
+                    <div class="plan-price">R$ 250,00<span class="plan-period">/total</span></div>
+                    <p style="font-size: 0.9rem; color: var(--text-gray);">Foco no longo prazo</p>
+                    <ul class="plan-features">
+                        <li><span class="check">✔</span> 6 meses de acompanhamento</li>
+                        <li><span class="check">✔</span> Troca de treino a cada 30 dias</li>
+                        <li><span class="check">✔</span> Suporte 24h</li>
+                        <li><span class="check">✔</span> Plano alimentar (Bônus)</li>
+                    </ul>
+                    <a href="https://wa.me/5579996503410?text=Quero%20o%20plano%20SEMESTRAL%20do%20M%C3%A9todo%20Mero" class="btn btn-outline">Quero este</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding text-center" style="background: linear-gradient(to top, #000, #0F172A);">
+        <div class="container reveal">
+            <h2 class="highlight">Comece sua transformação hoje</h2>
+            <p class="subheadline">Não deixe para amanhã o corpo que você pode começar a construir agora.</p>
+            <div class="cta-group">
+                <a href="https://wa.me/5579999692866?text=Quero%20come%C3%A7ar%20o%20M%C3%A9todo%20Mero%20agora!" class="btn btn-primary">
+                    Garantir minha vaga
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="grid-3">
+                <div class="brand-name" style="font-size: 1.2rem;">
+                    <span class="brand-metodo">metodo</span><span class="brand-mero">mero</span>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; font-weight: normal; margin-top: 0.5rem;">Consultoria esportiva especializada em resultados reais.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; color: #fff;">Contatos</h4>
+                    <div class="footer-links">
+                        <a href="https://wa.me/5579999692866">WhatsApp Prof. Matheus</a>
+                        <a href="https://wa.me/5579996503410">WhatsApp Prof. Caíque</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; color: #fff;">Social</h4>
+                    <div class="footer-links">
+                        <a href="https://instagram.com/metodomero" target="_blank">Instagram @metodomero</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 3rem; color: #475569; font-size: 0.8rem;">
+                &copy; 2025 Método Mero. Todos os direitos reservados.<br>
+                Criado por 
+                <a href="https://www.instagram.com/seu_usuario/" target="_blank" style="
+                    background: linear-gradient(90deg, #8a2be2, #1e90ff);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    text-decoration: none;
+                    font-weight: bold;
+                ">wr.code</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.reveal');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
